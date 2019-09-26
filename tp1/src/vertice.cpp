@@ -4,6 +4,7 @@ Vertice::Vertice(unsigned int id, unsigned int idade){
   this->id = id;
   this->idade = idade;
   this->t = 0;
+  this->cor = Cor::BRANCO;
 }
 
 Vertice::~Vertice(){

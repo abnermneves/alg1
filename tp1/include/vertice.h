@@ -4,11 +4,16 @@
 #include <iostream>
 #include <list>
 
+//cores para o DFS, que significam
+//não explorado, explorando, explorado, respectivamente
+enum Cor {BRANCO, CINZA, PRETO};
+
 class Vertice{
 private:
   unsigned int id;
   unsigned int idade;
   unsigned int t; //tempo de término do DFS
+  Cor cor;
   std::list<Vertice*> vizinhos; //lista de vértices adjacentes
 public:
   Vertice(unsigned int id, unsigned int idade);
