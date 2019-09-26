@@ -19,7 +19,8 @@ void Grafo::addAresta(unsigned int a, unsigned int b){
 
 void Grafo::imprimirVertices(){
   for (unsigned int i = 0; i < this->n; i++){
-    std::cout << this->vertices.at(i) << " ";
+    std::cout << "(" << this->vertices.at(i)->get_id()
+              << ", " << this->vertices.at(i)->get_idade() << ") ";
   }
   std::cout << std::endl;
 }

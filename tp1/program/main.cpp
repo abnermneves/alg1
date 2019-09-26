@@ -17,7 +17,7 @@ int main(){
     g->addAresta(a, b);
   }
 
-  g->imprimirVertices();
+  g->imprimirGrafo();
 
   return 0;
 }
