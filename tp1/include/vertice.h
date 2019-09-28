@@ -13,6 +13,7 @@ private:
   unsigned int id;
   unsigned int idade;
   unsigned int t; //tempo de término do DFS
+  unsigned int antecessor; //id do vértice anterior; 0 é default
   Cor cor;
   std::list<Vertice*> vizinhos; //lista de vértices adjacentes
 public:
@@ -21,10 +22,17 @@ public:
   void addVizinho(Vertice* v);
   void imprimirVizinhos(); //imprime os vizinhos a, b, c, ... do vértice v
   void imprimirArestas(); //imprime as arestas v a, v b, v c, ... do vértice v
-
+  bool temVizinhos();
   unsigned int get_id();
   unsigned int get_idade();
   unsigned int get_t();
+  unsigned int get_antecessor();
+  std::list<Vertice*> get_vizinhos();
+  Cor get_cor();
+
+  void set_t(unsigned int t);
+  void set_antecessor(unsigned int id_antecessor);
+  void set_cor(Cor cor);
 };
 
 #endif

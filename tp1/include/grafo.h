@@ -9,7 +9,10 @@ class Grafo {
 private:
   unsigned int n; //número de vértices
   unsigned int m; //número de arestas
+  bool ordTopoPronta; //diz se uma ordenação topológica já foi feita
+  bool temCiclo;
   std::vector<Vertice*> vertices;
+  std::list<unsigned int> ordTopologica;
 
 public:
   Grafo(unsigned int n, unsigned int m);
@@ -20,6 +23,9 @@ public:
   void imprimirArestas(); //imprime "a b" para cada aresta do vértice a para b
   void imprimirGrafo(); //imprime os vértices e as arestas
   void DFS();
+  void visitaDFS(Vertice* u, unsigned int* tempo);
+  void swap(unsigned int a, unsigned int b);
+  void meeting();
 };
 
 #endif

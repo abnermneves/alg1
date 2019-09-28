@@ -17,7 +17,7 @@ int main(){
     g->addAresta(a, b);
   }
 
-  g->imprimirGrafo();
+  g->meeting();
 
   return 0;
 }
