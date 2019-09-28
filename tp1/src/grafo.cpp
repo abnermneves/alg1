@@ -72,6 +72,7 @@ void Grafo::DFS(){
   //std::cout << "oi" << std::endl;
   Vertice* x;
   unsigned int* tempo = new unsigned int(0);
+  unsigned int icmj;
   //std::cout << *tempo << " " << tempo << std::endl;
 
   //define todos os vértices como não visitados,
@@ -92,8 +93,9 @@ void Grafo::DFS(){
 
   for (unsigned int i = 0; i < this->n; i++){
     x = this->vertices.at(i);
+    icmj = x->get_idade();
     if (x->get_cor() == Cor::BRANCO){
-      this->visitaDFS(x, tempo);
+      this->visitaDFS(x, tempo, icmj);
     }
   }
 
@@ -106,17 +108,19 @@ void Grafo::DFS(){
 //visita cada vizinho dele recursivamente
 //quando termina de visitar os vizinhos, colore de preto
 //e o adiciona à ordenação topológica do grafo
-void Grafo::visitaDFS(Vertice* u, unsigned int* tempo){
+void Grafo::visitaDFS(Vertice* u, unsigned int* tempo, unsigned int icmj){
   u->set_cor(Cor::CINZA);
   (*tempo)++;
 
-
   if (u->temVizinhos()){
     Vertice* v;
-
     //copia os vizinhos para uma lista da qual eles poderão ser apagados
     //à medida que forem visitados
     std::list<Vertice*> adj = u->get_vizinhos();
+
+    if(u->get_idade() < icmj){
+      icmj = u->get_idade();
+    }
 
     while (!adj.empty()){
       v = adj.front();
@@ -124,11 +128,12 @@ void Grafo::visitaDFS(Vertice* u, unsigned int* tempo){
       adj.pop_front();
       //std::cout << v->get_idade() << std::endl;
 
+
       //chama visitaDFS recursivamente para o vizinho
       //se ele ainda não foi visitado
       if (v->get_cor() == Cor::BRANCO){
         v->set_antecessor(u->get_id());
-        this->visitaDFS(v, tempo);
+        this->visitaDFS(v, tempo, icmj);
       }
       //se encontra algum vértice cinza,
       //então o grafo tem um ciclo
@@ -143,6 +148,7 @@ void Grafo::visitaDFS(Vertice* u, unsigned int* tempo){
   u->set_cor(Cor::PRETO);
   (*tempo)++;
   u->set_t(*tempo);
+  u->set_icmj(icmj);
   this->ordTopologica.push_front(u->get_id());
 }
 
@@ -176,6 +182,16 @@ void Grafo::swap(unsigned int a, unsigned int b){
   } else {
     //std::cout << "nao tem ciclo" << std::endl;
     std::cout << "T" << std::endl;
+  }
+}
+
+void Grafo::commander(unsigned int id){
+  Vertice* v = this->vertices.at(id-1);
+  std::cout << "C ";
+  if (v->get_icmj() == v->get_idade()){
+    std::cout << "*" << std::endl;
+  } else {
+    std::cout << v->get_icmj() << std::endl;
   }
 }
 

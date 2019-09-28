@@ -32,6 +32,7 @@ int main(){
         break;
       case 'C':
         std::cin >> a;
+        g->commander(a);
         break;
       case 'M':
         g->meeting();
@@ -39,7 +40,7 @@ int main(){
     }
   }
   g->imprimirGrafo();
-  auto gt = g->transposto();
-  gt->imprimirGrafo();
+  //auto gt = g->transposto();
+  //gt->imprimirGrafo();
   return 0;
 }

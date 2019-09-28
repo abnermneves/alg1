@@ -14,6 +14,7 @@ private:
   unsigned int idade;
   unsigned int t; //tempo de término do DFS
   unsigned int antecessor; //id do vértice anterior; 0 é default
+  unsigned int icmj; //idade do comandante mais jovem
   Cor cor;
   std::list<Vertice*> vizinhos; //lista de vértices adjacentes
 public:
@@ -30,6 +31,7 @@ public:
   unsigned int get_idade();
   unsigned int get_t();
   unsigned int get_antecessor();
+  unsigned int get_icmj();
   std::list<Vertice*> get_vizinhos();
   std::list<Vertice*>* get_pointer_vizinhos();
   Cor get_cor();
@@ -37,6 +39,7 @@ public:
   void set_t(unsigned int t);
   void set_antecessor(unsigned int id_antecessor);
   void set_cor(Cor cor);
+  void set_icmj(unsigned int icmj);
 };
 
 #endif

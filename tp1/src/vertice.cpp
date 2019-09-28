@@ -5,6 +5,7 @@ Vertice::Vertice(unsigned int id, unsigned int idade){
   this->idade = idade;
   this->t = 0;
   this->antecessor = 0;
+  this->icmj = 0;
   this->cor = Cor::BRANCO;
 }
 
@@ -90,6 +91,10 @@ unsigned int Vertice::get_antecessor(){
   return this->antecessor;
 }
 
+unsigned int Vertice::get_icmj(){
+  return this->icmj;
+}
+
 std::list<Vertice*> Vertice::get_vizinhos(){
   return this->vizinhos;
 }
@@ -112,4 +117,8 @@ void Vertice::set_antecessor(unsigned int id_antecessor){
 
 void Vertice::set_cor(Cor cor){
   this->cor = cor;
+}
+
+void Vertice::set_icmj(unsigned int icmj){
+  this->icmj = icmj;
 }
