@@ -94,6 +94,10 @@ std::list<Vertice*> Vertice::get_vizinhos(){
   return this->vizinhos;
 }
 
+std::list<Vertice*>* Vertice::get_pointer_vizinhos(){
+  return &(this->vizinhos);
+}
+
 Cor Vertice::get_cor(){
   return this->cor;
 }

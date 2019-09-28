@@ -31,6 +31,7 @@ public:
   unsigned int get_t();
   unsigned int get_antecessor();
   std::list<Vertice*> get_vizinhos();
+  std::list<Vertice*>* get_pointer_vizinhos();
   Cor get_cor();
 
   void set_t(unsigned int t);

@@ -11,6 +11,33 @@ Grafo::~Grafo(){
 
 }
 
+Grafo* Grafo::transposto(){
+  Grafo* g = this;
+  Grafo* gt = new Grafo();
+  Vertice* u;
+  Vertice* v;
+
+  //copia os vértices de G para Gtransposto
+  for (unsigned int i = 0; i < g->n; i++){
+    u = g->vertices.at(i);
+    v = new Vertice(u->get_id(), u->get_idade());
+    gt->addVertice(v);
+  }
+
+  //copia todas as arestas com o sentido invertido
+  for (unsigned int i = 0; i < g->n; i++){
+    u = g->vertices.at(i);
+    std::list<Vertice*>* adj = u->get_pointer_vizinhos();
+
+    for (auto it = adj->begin(); it != adj->end(); it++){
+      v = *it;
+      gt->addAresta(v->get_id(), u->get_id());
+    }
+  }
+
+  return gt;
+}
+
 void Grafo::addVertice(Vertice* v){
   this->vertices.push_back(v);
   this->n++;
@@ -71,6 +98,8 @@ void Grafo::DFS(){
   }
 
   this->ordTopoPronta = true;
+
+  delete tempo;
 }
 
 //procedimento recursivo que visita o vértice atual e o colore de cinza
@@ -101,6 +130,8 @@ void Grafo::visitaDFS(Vertice* u, unsigned int* tempo){
         v->set_antecessor(u->get_id());
         this->visitaDFS(v, tempo);
       }
+      //se encontra algum vértice cinza,
+      //então o grafo tem um ciclo
       else if (v->get_cor() == Cor::CINZA){
         this->temCiclo = true;
       }
@@ -115,6 +146,8 @@ void Grafo::visitaDFS(Vertice* u, unsigned int* tempo){
   this->ordTopologica.push_front(u->get_id());
 }
 
+//roda o DFS e, se chegar em algum vértice cinza,
+//atualiza a variável temCiclo para TRUE
 void Grafo::verificaCiclo(){
   this->DFS();
 }
@@ -147,9 +180,7 @@ void Grafo::swap(unsigned int a, unsigned int b){
 }
 
 void Grafo::meeting(){
-  if (!this->ordTopoPronta){
-    this->DFS();
-  }
+  this->DFS();
 
   std::cout << "M ";
 

@@ -17,6 +17,7 @@ private:
 public:
   Grafo();
   ~Grafo();
+  Grafo* transposto();
   void addVertice(Vertice* v);
   void addAresta(unsigned int a, unsigned int b);
   void imprimirVertices(); //imprime "(ID, idade)" de cada vértice
