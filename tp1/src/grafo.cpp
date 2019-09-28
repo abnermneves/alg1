@@ -1,8 +1,8 @@
 #include "grafo.h"
 
-Grafo::Grafo(unsigned int n, unsigned int m){
-  this->n = n;
-  this->m = m;
+Grafo::Grafo(){
+  this->n = 0;
+  this->m = 0;
   this->ordTopoPronta = false;
   this->temCiclo = false;
 }
@@ -13,10 +13,12 @@ Grafo::~Grafo(){
 
 void Grafo::addVertice(Vertice* v){
   this->vertices.push_back(v);
+  this->n++;
 }
 
 void Grafo::addAresta(unsigned int a, unsigned int b){
   this->vertices.at(a-1)->addVizinho(this->vertices.at(b-1));
+  this->m++;
 }
 
 void Grafo::imprimirVertices(){
@@ -40,18 +42,18 @@ void Grafo::imprimirGrafo(){
 }
 
 void Grafo::DFS(){
-  std::cout << "oi" << std::endl;
+  //std::cout << "oi" << std::endl;
   Vertice* x;
   unsigned int* tempo = new unsigned int(0);
-  std::cout << *tempo << " " << tempo << std::endl;
+  //std::cout << *tempo << " " << tempo << std::endl;
 
   //define todos os vértices como não visitados,
   // e todos os antecessores como 0
   //pro caso de o DFS já ter sido executado
   for (unsigned int i = 0; i < this->n; i++){
     x = this->vertices.at(i);
-    std::cout << "X: ";
-    std::cout << x->get_id() << " ";
+    //std::cout << "X: ";
+    //td::cout << x->get_id() << " ";
     x->set_cor(Cor::BRANCO);
     x->set_antecessor(0);
   }
@@ -89,9 +91,9 @@ void Grafo::visitaDFS(Vertice* u, unsigned int* tempo){
 
     while (!adj.empty()){
       v = adj.front();
-      std::cout << "V: " << v->get_id() << " ";
+      //std::cout << "V: " << v->get_id() << " ";
       adj.pop_front();
-      std::cout << v->get_idade() << std::endl;
+      //std::cout << v->get_idade() << std::endl;
 
       //chama visitaDFS recursivamente para o vizinho
       //se ele ainda não foi visitado
@@ -113,8 +115,35 @@ void Grafo::visitaDFS(Vertice* u, unsigned int* tempo){
   this->ordTopologica.push_front(u->get_id());
 }
 
-void swap(unsigned int a, unsigned int b){
-  
+void Grafo::verificaCiclo(){
+  this->DFS();
+}
+
+void Grafo::swap(unsigned int a, unsigned int b){
+  Vertice* u = this->vertices.at(a-1);
+  Vertice* v = this->vertices.at(b-1);
+  //std::cout << "oi" << std::endl;
+  bool inverteu = false;
+  std::cout << "S ";
+
+  inverteu = u->inverterAresta(v);
+  //std::cout << "oi2" << std::endl;
+  //se não inverteu porque a aresta não existia, termina
+  if (!inverteu){
+    std::cout << "N" << std::endl;
+    return;
+  }
+
+  //se criou um ciclo, inverte de novo e termina
+  this->verificaCiclo();
+  if (this->temCiclo){
+    u->inverterAresta(v);
+    std::cout << "N" << std::endl;
+    return;
+  } else {
+    //std::cout << "nao tem ciclo" << std::endl;
+    std::cout << "T" << std::endl;
+  }
 }
 
 void Grafo::meeting(){

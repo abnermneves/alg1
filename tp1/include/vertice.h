@@ -20,9 +20,12 @@ public:
   Vertice(unsigned int id, unsigned int idade);
   ~Vertice();
   void addVizinho(Vertice* v);
+  void removeVizinho(Vertice* v);
   void imprimirVizinhos(); //imprime os vizinhos a, b, c, ... do vértice v
   void imprimirArestas(); //imprime as arestas v a, v b, v c, ... do vértice v
+  bool inverterAresta(Vertice* v); //inverte se existe uma aresta (u, v) ou (v, u)
   bool temVizinhos();
+  bool temArestaPara(Vertice* v);
   unsigned int get_id();
   unsigned int get_idade();
   unsigned int get_t();

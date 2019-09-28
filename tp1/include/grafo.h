@@ -15,7 +15,7 @@ private:
   std::list<unsigned int> ordTopologica;
 
 public:
-  Grafo(unsigned int n, unsigned int m);
+  Grafo();
   ~Grafo();
   void addVertice(Vertice* v);
   void addAresta(unsigned int a, unsigned int b);
@@ -24,6 +24,7 @@ public:
   void imprimirGrafo(); //imprime os vértices e as arestas
   void DFS();
   void visitaDFS(Vertice* u, unsigned int* tempo);
+  void verificaCiclo();
   void swap(unsigned int a, unsigned int b);
   void meeting();
 };
