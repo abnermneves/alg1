@@ -24,10 +24,11 @@ public:
   void imprimirArestas(); //imprime "a b" para cada aresta do vértice a para b
   void imprimirGrafo(); //imprime os vértices e as arestas
   void DFS();
-  void visitaDFS(Vertice* u, unsigned int* tempo, unsigned int icmj);
+  void visitaDFS(Vertice* u, unsigned int* tempo);
   void verificaCiclo();
   void swap(unsigned int a, unsigned int b);
   void commander(unsigned int id);
+  void visitaCommander(Vertice* u, unsigned int* icmj);
   void meeting();
 };
 

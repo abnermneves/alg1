@@ -39,7 +39,7 @@ int main(){
         break;
     }
   }
-  g->imprimirGrafo();
+  //g->imprimirGrafo();
   //auto gt = g->transposto();
   //gt->imprimirGrafo();
   return 0;

@@ -1,5 +1,9 @@
 #include "vertice.h"
 
+
+//--------------------------------- CONSTRUTOR -------------------------------//
+
+
 Vertice::Vertice(unsigned int id, unsigned int idade){
   this->id = id;
   this->idade = idade;
@@ -9,9 +13,17 @@ Vertice::Vertice(unsigned int id, unsigned int idade){
   this->cor = Cor::BRANCO;
 }
 
+
+//--------------------------------- DESTRUTOR -------------------------------//
+
+
 Vertice::~Vertice(){
 
 }
+
+
+//---------------------- ADIÇÃO E REMOÇÃO DE ARESTAS ---------------------//
+
 
 void Vertice::addVizinho(Vertice* v){
   this->vizinhos.push_back(v);
@@ -20,6 +32,10 @@ void Vertice::addVizinho(Vertice* v){
 void Vertice::removeVizinho(Vertice* v){
   this->vizinhos.remove(v);
 }
+
+
+//-----------------------------IMPRESSÕES----------------------------------//
+
 
 void Vertice::imprimirVizinhos(){
   std::list<Vertice*>::iterator it = this->vizinhos.begin();
@@ -34,6 +50,10 @@ void Vertice::imprimirArestas(){
     std::cout << this->id << " " << (*it)->get_id() << std::endl;
   }
 }
+
+
+//----------------------------- INVERSÃO DE ARESTA --------------------------//
+
 
 bool Vertice::inverterAresta(Vertice* v){
   Vertice* u = this;
@@ -63,6 +83,10 @@ bool Vertice::inverterAresta(Vertice* v){
   return false;
 }
 
+
+//----------------------------- EXISTÊNCIA DE ARESTAS -------------------------//
+
+
 bool Vertice::temVizinhos(){
   return !this->vizinhos.empty();
 }
@@ -74,6 +98,10 @@ bool Vertice::temArestaPara(Vertice* v){
   }
   return false;
 }
+
+
+//----------------------------- GETTERS --------------------------------------//
+
 
 unsigned int Vertice::get_id(){
   return this->id;
@@ -106,6 +134,10 @@ std::list<Vertice*>* Vertice::get_pointer_vizinhos(){
 Cor Vertice::get_cor(){
   return this->cor;
 }
+
+
+//--------------------------------- SETTERS ----------------------------------//
+
 
 void Vertice::set_t(unsigned int t){
   this->t = t;
