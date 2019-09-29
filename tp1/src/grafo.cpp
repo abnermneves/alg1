@@ -16,7 +16,9 @@ Grafo::Grafo(){
 
 
 Grafo::~Grafo(){
-
+  for (auto it = this->vertices.begin(); it != this->vertices.end(); it++){
+    delete *it;
+  }
 }
 
 
@@ -230,6 +232,7 @@ void Grafo::commander(unsigned int id){
       this->visitaCommander(v, icmj);
     }
 
+    gt->~Grafo();
   }
 
   //depois de visitados todos os vizinhos
@@ -242,6 +245,7 @@ void Grafo::commander(unsigned int id){
   } else {
      std::cout << x->get_icmj() << std::endl;
   }
+  delete icmj;
 }
 
 //função recursiva inspirada na visitaDFS
