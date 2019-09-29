@@ -91,18 +91,14 @@ void Grafo::imprimirGrafo(){
 
 
 void Grafo::DFS(){
-  //std::cout << "oi" << std::endl;
   Vertice* x;
   unsigned int* tempo = new unsigned int(0);
-  //std::cout << *tempo << " " << tempo << std::endl;
 
   //define todos os vértices como não visitados,
   // e todos os antecessores como 0
   //pro caso de o DFS já ter sido executado
   for (unsigned int i = 0; i < this->n; i++){
     x = this->vertices.at(i);
-    //std::cout << "X: ";
-    //td::cout << x->get_id() << " ";
     x->set_cor(Cor::BRANCO);
     x->set_antecessor(0);
   }
@@ -141,9 +137,7 @@ void Grafo::visitaDFS(Vertice* u, unsigned int* tempo){
 
     while (!adj.empty()){
       v = adj.front();
-      //std::cout << "V: " << v->get_id() << " ";
       adj.pop_front();
-      //std::cout << v->get_idade() << std::endl;
 
       //chama visitaDFS recursivamente para o vizinho
       //se ele ainda não foi visitado
@@ -184,12 +178,11 @@ void Grafo::verificaCiclo(){
 void Grafo::swap(unsigned int a, unsigned int b){
   Vertice* u = this->vertices.at(a-1);
   Vertice* v = this->vertices.at(b-1);
-  //std::cout << "oi" << std::endl;
   bool inverteu = false;
   std::cout << "S ";
 
   inverteu = u->inverterAresta(v);
-  //std::cout << "oi2" << std::endl;
+
   //se não inverteu porque a aresta não existia, termina
   if (!inverteu){
     std::cout << "N" << std::endl;
@@ -203,7 +196,6 @@ void Grafo::swap(unsigned int a, unsigned int b){
     std::cout << "N" << std::endl;
     return;
   } else {
-    //std::cout << "nao tem ciclo" << std::endl;
     std::cout << "T" << std::endl;
   }
 }

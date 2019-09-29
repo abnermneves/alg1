@@ -21,8 +21,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
 main: $(OBJECTS)
-	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) $(INC) $(MAIN) $^ -o $(BINDIR)/main
+	$(CC) $(CFLAGS) $(INC) $(MAIN) $^ -o tp1
 
 tests: $(OBJECTS)
 	@mkdir -p $(BINDIR)
@@ -32,7 +31,7 @@ tests: $(OBJECTS)
 all: main
 
 run: main
-	$(BINDIR)/main
+	./tp1
 
 coverage:
 	@mkdir -p coverage/
@@ -40,6 +39,6 @@ coverage:
 	@$(RM) *.gcda *.gcno
 
 clean:
-	$(RM) -r $(OBJDIR) $(BINDIR) coverage/* *.gcda *.gcno *.gcov
+	$(RM) -r $(OBJDIR) $(BINDIR) coverage/* *.gcda *.gcno *.gcov tp1
 
 .PHONY: clean coverage

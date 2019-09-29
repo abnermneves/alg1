@@ -57,29 +57,20 @@ void Vertice::imprimirArestas(){
 
 bool Vertice::inverterAresta(Vertice* v){
   Vertice* u = this;
-  //std::cout << "sera que vai inverter" << std::endl;
+
+  //se existe a aresta (u, v), inverte
   if (u->temArestaPara(v)){
-    //std::cout << "removeu 1" << std::endl;
-    //std::cout << "Vizinhos de " << u->get_id() << ": ";
-    //u->imprimirVizinhos();
-    //std::cout << std::endl;
     u->removeVizinho(v);
-    //std::cout << "Vizinhos de " << u->get_id() << ": ";
-    //u->imprimirVizinhos();
-    //std::cout << std::endl;
-    //std::cout << "adicionou 1" << std::endl;
-    //std::cout << "adicionou 3" << std::endl;
     v->addVizinho(u);
     return true;
   }
+
+  //se existe a aresta (v, u), inverte
   else if (v->temArestaPara(u)){
-    //std::cout << "removeu 2" << std::endl;
     v->removeVizinho(u);
-    //std::cout << "adicionou 2" << std::endl;
     u->addVizinho(v);
     return true;
   }
-  //std::cout << "nao inverteu" << std::endl;
   return false;
 }
 
