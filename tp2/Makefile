@@ -18,7 +18,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
 main: $(OBJECTS)
-	$(CC) $(CFLAGS) $(INC) $(MAIN) $^ -o tp1
+	$(CC) $(CFLAGS) $(INC) $(MAIN) $^ -o tp2
 
 all: main
 
@@ -26,6 +26,6 @@ run: main
 	./tp1
 
 clean:
-	$(RM) -r $(OBJDIR) $(BINDIR) coverage/* *.gcda *.gcno *.gcov tp1
+	$(RM) -r $(OBJDIR) $(BINDIR) coverage/* *.gcda *.gcno *.gcov tp2
 
 .PHONY: clean coverage
