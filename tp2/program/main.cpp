@@ -26,7 +26,8 @@ int main(int argc, char* argv[]){
 
       file.close();
     }
-
+    
+    knapsack_greedy(n, m, &custo, &pontos);
     knapsack_dynamic(n, m, &custo, &pontos);
 
   return 0;
