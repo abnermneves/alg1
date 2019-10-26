@@ -4,6 +4,8 @@
 int main(int argc, char* argv[]){
   unsigned int n, m, d, p;
   std::vector<unsigned int> custo, pontos;
+  custo.push_back(0);
+  pontos.push_back(0);
 
   //se foi executado com um parâmetro, lê do arquivo
   if (argc == 2){
