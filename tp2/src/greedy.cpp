@@ -24,7 +24,7 @@ void knapsack_greedy(unsigned int W, unsigned int m,
   //pois ele está em ordem crescente de razão pontos/custo
   auto it = pc.end();
   for (it--; it != pc.begin() && w > 0; it--){
-    //divide o orçamento restante pelo custo da diárioa na ilha
+    //divide o orçamento restante pelo custo da diária na ilha
     //para saber quantos dias ainda é possível ficar nela
     repeticoes = 0;
     repeticoes = std::floor(w/custo->at(it->second));
@@ -35,14 +35,6 @@ void knapsack_greedy(unsigned int W, unsigned int m,
     w -= custo->at(it->second)*repeticoes;
     pontuacao += pontos->at(it->second)*repeticoes;
   }
-
-  /*
-  auto itt = pc.end();
-  for (itt--; itt != pc.begin(); itt--){
-    std::cout << "(" << itt->first << ", " << itt->second << ") ";
-  }
-  std::cout << std::endl;
-  */
 
   std::cout << pontuacao << " " << dias << std::endl;
 }

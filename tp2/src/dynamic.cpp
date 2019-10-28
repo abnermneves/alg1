@@ -23,11 +23,10 @@ void knapsack_dynamic(unsigned int W, unsigned int n,
         best[i][w] = best[i-1][w];
         dias[i][w] = dias[i-1][w];
       }
-
-      //se a nova ilha não exceder o orçamento, então compara qual solução é melhor:
-      //a que considera apenas as ilhas anteriores ou a que acrescenta essa nova ilha
-      //à melhor solução para o restante do dinheiro
       else {
+        //se a nova ilha não exceder o orçamento, então compara qual solução é melhor:
+        //a que considera apenas as ilhas anteriores ou a que acrescenta essa nova ilha
+        //à melhor solução para o restante do dinheiro
         if (best[i-1][w] > pontos->at(i) + best[i-1][w-custo->at(i)]){
           best[i][w] = best[i-1][w];
           dias[i][w] = dias[i-1][w];
@@ -41,14 +40,5 @@ void knapsack_dynamic(unsigned int W, unsigned int n,
     }
   }
 
-  /*
-  //imprime a matriz toda
-  for (unsigned int i = 0; i <= n; i++){
-    for (unsigned int j = 0; j <= W; j++){
-      std::cout << best[i][j] << " ";
-    }
-    std::cout << std::endl;
-  }
-  */
   std::cout << best[n][W] << " " << dias[n][W] << std::endl;
 }

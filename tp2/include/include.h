@@ -4,7 +4,11 @@
 #include <iostream>
 #include <vector>
 
-void knapsack_greedy(unsigned int n, unsigned int m, std::vector<unsigned int>* custo, std::vector<unsigned int>* pontos);
-void knapsack_dynamic(unsigned int n, unsigned int m, std::vector<unsigned int>* custo, std::vector<unsigned int>* pontos);
+void knapsack_greedy(unsigned int n, unsigned int m,
+                     std::vector<unsigned int>* custo,
+                     std::vector<unsigned int>* pontos);
+void knapsack_dynamic(unsigned int n, unsigned int m,
+                      std::vector<unsigned int>* custo,
+                      std::vector<unsigned int>* pontos);
 
 #endif

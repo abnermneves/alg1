@@ -22,13 +22,15 @@ int main(int argc, char* argv[]){
           custo.push_back(d);
           pontos.push_back(p);
         }
-      }
 
       file.close();
+
+      knapsack_greedy(n, m, &custo, &pontos);
+      knapsack_dynamic(n, m, &custo, &pontos);
+    } else {
+      std::cout << "Arquivo inválido!" << std::endl;
     }
-    
-    knapsack_greedy(n, m, &custo, &pontos);
-    knapsack_dynamic(n, m, &custo, &pontos);
+  }
 
   return 0;
 }
