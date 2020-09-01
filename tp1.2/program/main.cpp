@@ -48,10 +48,11 @@ int main(int argc, char* argv[]) {
         file >> i >> j;
         letra = a + 65; //ASCII
         indice = index(i, j, m);
-        std::cout << letra << " " << indice << std::endl;
+        jogadores.insert(std::pair<char, unsigned int>(letra, indice));
     }
 
     file.close();
+
 
     //imprime tabuleiro
     for (unsigned int i = 0; i < n; i++){
@@ -59,6 +60,11 @@ int main(int argc, char* argv[]) {
             std::cout << tabuleiro[i][j] << " ";
         }
         std::cout << std::endl;
+    }
+
+    //imprime jogadores
+    for (auto it = jogadores.begin(); it != jogadores.end(); it++){
+        std::cout << it->first << " " << it->second << std::endl;
     }
 
     Grafo g = Grafo(n, m, tabuleiro);
