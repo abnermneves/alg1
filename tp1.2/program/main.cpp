@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 
     //------------------ DECLARAÇÃO E LEITURA DE JOGADORES -----------------//
 
-    std::map<char, unsigned int> jogadores;
+    std::priority_queue<std::pair<char, unsigned int>> jogadores;
     char letra;
     unsigned int indice;
     //lê posições iniciais dos jogadores
@@ -48,27 +48,29 @@ int main(int argc, char* argv[]) {
         file >> i >> j;
         letra = a + 65; //ASCII
         indice = index(i, j, m);
-        jogadores.insert(std::pair<char, unsigned int>(letra, indice));
+        jogadores.push(std::pair<char, unsigned int>(letra, indice));
     }
 
     file.close();
 
-
+/*
     //imprime tabuleiro
     for (unsigned int i = 0; i < n; i++){
         for (unsigned int j = 0; j < m; j++){
             std::cout << tabuleiro[i][j] << " ";
         }
         std::cout << std::endl;
-    }
+    }*/
 
     //imprime jogadores
-    for (auto it = jogadores.begin(); it != jogadores.end(); it++){
-        std::cout << it->first << " " << it->second << std::endl;
+    while (!jogadores.empty()){
+        auto it = jogadores.top();
+        jogadores.pop();
+        std::cout << it.first << " " << it.second << std::endl;
     }
 
-    Grafo g = Grafo(n, m, tabuleiro);
-    g.imprimir();
+    //Grafo g = Grafo(n, m, tabuleiro);
+    //g.imprimir();
 
     return 0;
 }
