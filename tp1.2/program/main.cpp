@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "grafo.h"
 
 using namespace std;
 
@@ -20,7 +21,12 @@ int main(int argc, char* argv[]) {
     file >> n >> m >> k;
 
     //cria tabuleiro com valores da entrada
-    unsigned int tabuleiro[n][m];
+    unsigned int** tabuleiro;
+    tabuleiro = new unsigned int* [n];
+    for (unsigned int i = 0; i < n; i++){
+        tabuleiro[i] = new unsigned int[m];
+    }
+
     for (unsigned int i = 0; i < n; i++){
         for (unsigned int j = 0; j < m; j++){
             file >> tabuleiro[i][j];
@@ -35,7 +41,6 @@ int main(int argc, char* argv[]) {
     }
 
     file.close();
-
     //imprime tabuleiro
     for (unsigned int i = 0; i < n; i++){
         for (unsigned int j = 0; j < m; j++){
@@ -43,6 +48,9 @@ int main(int argc, char* argv[]) {
         }
         cout << endl;
     }
+
+    Grafo g = Grafo(n, m, tabuleiro);
+    g.imprimir();
 
     return 0;
 }
