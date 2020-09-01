@@ -9,13 +9,12 @@ private:
     unsigned int n, m; //dimensões do tabuleiro
     std::vector<std::list<int>*> vertices; //vector de lists para as adjacências
 public:
+    //construtor
     Grafo(unsigned int n, unsigned int m, unsigned int** tabuleiro);
+
+    //destrutor
     ~Grafo();
 
-    //converte os índices da matriz para uma indexação linear
-    unsigned int index(int i, int j);
-    //verifica se os índices são válidos
-    bool indicesValidos(int i, int j);
     //imprime grafo
     void imprimir();
 };

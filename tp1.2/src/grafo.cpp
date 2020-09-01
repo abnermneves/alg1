@@ -1,4 +1,5 @@
 #include "grafo.h"
+#include "funcoes.h"
 #include <iostream>
 
 Grafo::Grafo(unsigned int n, unsigned int m, unsigned int** tabuleiro){
@@ -9,30 +10,30 @@ Grafo::Grafo(unsigned int n, unsigned int m, unsigned int** tabuleiro){
     unsigned int v, x, y, mx, my;
     for (unsigned int i = 0; i < n; i++){
         for (unsigned int j = 0; j < m; j++){
-            v = index(i, j); //vértice atual
+            v = index(i, j, this->m); //vértice atual
             this->vertices.push_back(new std::list<int>);
 
             //vizinho na direção +x
-            if (indicesValidos(i, j+1)){
-                x = index(i, j+1);
+            if (indicesValidos(i, j+1, this->n, this->m)){
+                x = index(i, j+1, this->m);
                 this->vertices.at(v)->push_back(x);
             }
 
             //vizinho na direção +y
-            if (indicesValidos(i-1, j)){
-                y = index(i-1, j);
+            if (indicesValidos(i-1, j, this->n, this->m)){
+                y = index(i-1, j, this->m);
                 this->vertices.at(v)->push_back(y);
             }
 
             //vizinho na direção -x
-            if (indicesValidos(i, j-1)){
-                mx = index(i, j-1);
+            if (indicesValidos(i, j-1, this->n, this->m)){
+                mx = index(i, j-1, this->m);
                 this->vertices.at(v)->push_back(mx);
             }
 
             //vizinho na direção -y
-            if (indicesValidos(i+1, j)){
-                my = index(i+1, j);
+            if (indicesValidos(i+1, j, this->n, this->m)){
+                my = index(i+1, j, this->m);
                 this->vertices.at(v)->push_back(my);
             }
         }
@@ -42,7 +43,7 @@ Grafo::Grafo(unsigned int n, unsigned int m, unsigned int** tabuleiro){
 Grafo::~Grafo(){
 
 }
-
+/*
 unsigned int Grafo::index(int i, int j){
     return this->m*i + j;
 }
@@ -53,7 +54,7 @@ bool Grafo::indicesValidos(int i, int j){
         return false;
     return true;
 }
-
+*/
 void Grafo::imprimir(){
     for (unsigned int i = 0; i < this->n*this->m; i++){
         auto v = this->vertices.at(i);
