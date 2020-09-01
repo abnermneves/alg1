@@ -5,6 +5,7 @@
 #include <map>
 #include "grafo.h"
 #include "funcoes.h"
+#include "jogador.h"
 
 int main(int argc, char* argv[]) {
     if (argc != 2)
@@ -38,9 +39,10 @@ int main(int argc, char* argv[]) {
 
     //------------------ DECLARAÇÃO E LEITURA DE JOGADORES -----------------//
 
-    std::priority_queue<std::pair<char, unsigned int>> jogadores;
+    std::priority_queue<Jogador*, std::vector<Jogador*>, comparator_jogadores> jogadores;
     char letra;
     unsigned int indice;
+
     //lê posições iniciais dos jogadores
     for (unsigned int a = 0; a < k; a++){
         //por enquanto é só bullshit até eu implementar de vdd
@@ -48,7 +50,7 @@ int main(int argc, char* argv[]) {
         file >> i >> j;
         letra = a + 65; //ASCII
         indice = index(i, j, m);
-        jogadores.push(std::pair<char, unsigned int>(letra, indice));
+        jogadores.push(new Jogador(letra, indice));
     }
 
     file.close();
@@ -66,7 +68,7 @@ int main(int argc, char* argv[]) {
     while (!jogadores.empty()){
         auto it = jogadores.top();
         jogadores.pop();
-        std::cout << it.first << " " << it.second << std::endl;
+        std::cout << it->get_nome() << " " << it->get_posicao() << std::endl;
     }
 
     //Grafo g = Grafo(n, m, tabuleiro);
