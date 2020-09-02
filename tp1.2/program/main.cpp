@@ -74,5 +74,14 @@ int main(int argc, char* argv[]) {
     Grafo g = Grafo(n, m, tabuleiro);
     g.imprimir();
 
+    auto tree = g.BFS(1);
+    for (auto it = tree->begin(); it != tree->end(); it++){
+        for (auto it2 = (*it)->begin(); it2 != (*it)->end(); it2++){
+            std::cout << *it2 << " ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+
     return 0;
 }

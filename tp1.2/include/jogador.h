@@ -1,11 +1,16 @@
 #ifndef JOGADOR_H
 #define JOGADOR_H
 
+#include <vector>
+#include <list>
+
 class Jogador {
 private:
     char nome;
-    unsigned int posicao;
+    unsigned int posicao; //posição inicial
     unsigned int casas_andadas_ultima_rodada;
+    std::vector<int>* li; //camada Li para a BFS
+    std::vector<int>* li1; //camada Li+1 para a BFS;
 public:
     Jogador(char nome, unsigned int posicao_inicial);
     ~Jogador();
