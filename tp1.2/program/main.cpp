@@ -55,14 +55,14 @@ int main(int argc, char* argv[]) {
 
     file.close();
 
-/*
+
     //imprime tabuleiro
     for (unsigned int i = 0; i < n; i++){
         for (unsigned int j = 0; j < m; j++){
             std::cout << tabuleiro[i][j] << " ";
         }
         std::cout << std::endl;
-    }*/
+    }
 
     //imprime jogadores
     while (!jogadores.empty()){
@@ -71,8 +71,8 @@ int main(int argc, char* argv[]) {
         std::cout << it->get_nome() << " " << it->get_posicao() << std::endl;
     }
 
-    //Grafo g = Grafo(n, m, tabuleiro);
-    //g.imprimir();
+    Grafo g = Grafo(n, m, tabuleiro);
+    g.imprimir();
 
     return 0;
 }

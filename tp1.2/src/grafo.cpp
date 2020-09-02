@@ -7,33 +7,37 @@ Grafo::Grafo(unsigned int n, unsigned int m, unsigned int** tabuleiro){
     this->m = m;
 
     //adicionando adjacências
-    unsigned int v, x, y, mx, my;
+    unsigned int v, c, x, y, mx, my;
     for (unsigned int i = 0; i < n; i++){
         for (unsigned int j = 0; j < m; j++){
             v = index(i, j, this->m); //vértice atual
+            c = tabuleiro[i][j]; // quantidade de casas a andar
             this->vertices.push_back(new std::list<int>);
 
+            if (c == 0)
+                continue;
+
             //vizinho na direção +x
-            if (indicesValidos(i, j+1, this->n, this->m)){
-                x = index(i, j+1, this->m);
+            if (indicesValidos(i, j+c, this->n, this->m)){
+                x = index(i, j+c, this->m);
                 this->vertices.at(v)->push_back(x);
             }
 
             //vizinho na direção +y
-            if (indicesValidos(i-1, j, this->n, this->m)){
-                y = index(i-1, j, this->m);
+            if (indicesValidos(i-c, j, this->n, this->m)){
+                y = index(i-c, j, this->m);
                 this->vertices.at(v)->push_back(y);
             }
 
             //vizinho na direção -x
-            if (indicesValidos(i, j-1, this->n, this->m)){
-                mx = index(i, j-1, this->m);
+            if (indicesValidos(i, j-c, this->n, this->m)){
+                mx = index(i, j-c, this->m);
                 this->vertices.at(v)->push_back(mx);
             }
 
             //vizinho na direção -y
-            if (indicesValidos(i+1, j, this->n, this->m)){
-                my = index(i+1, j, this->m);
+            if (indicesValidos(i+c, j, this->n, this->m)){
+                my = index(i+c, j, this->m);
                 this->vertices.at(v)->push_back(my);
             }
         }
