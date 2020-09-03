@@ -13,21 +13,23 @@ Grafo::Grafo(unsigned int n, unsigned int m, unsigned int** tabuleiro){
             v = index(i, j, this->m); //vértice atual
             c = tabuleiro[i][j]; // quantidade de casas a andar
             this->vertices.push_back(new std::list<int>);
+            this->casas.push_back(c);
             this->descoberto.push_back(false);
 
+            //se é pra andar 0 casas, o vértice não terá vizinhos
             if (c == 0)
                 continue;
-
-            //vizinho na direção +x
-            if (indicesValidos(i, j+c, this->n, this->m)){
-                x = index(i, j+c, this->m);
-                this->vertices.at(v)->push_back(x);
-            }
 
             //vizinho na direção +y
             if (indicesValidos(i-c, j, this->n, this->m)){
                 y = index(i-c, j, this->m);
                 this->vertices.at(v)->push_back(y);
+            }
+
+            //vizinho na direção +x
+            if (indicesValidos(i, j+c, this->n, this->m)){
+                x = index(i, j+c, this->m);
+                this->vertices.at(v)->push_back(x);
             }
 
             //vizinho na direção -x
@@ -46,7 +48,8 @@ Grafo::Grafo(unsigned int n, unsigned int m, unsigned int** tabuleiro){
 }
 
 Grafo::~Grafo(){
-
+    for (auto it = this->vertices.begin(); it != this->vertices.end(); it++)
+        delete *it;
 }
 
 std::vector<std::list<int>*>* Grafo::BFS(unsigned int s){
@@ -91,6 +94,18 @@ std::vector<std::list<int>*>* Grafo::BFS(unsigned int s){
         i++;
     }
     return tree;
+}
+
+unsigned int Grafo::get_n(){
+    return this->n;
+}
+
+unsigned int Grafo::get_m(){
+    return this->m;
+}
+
+unsigned int Grafo::get_casas(unsigned int v){
+    return this->casas.at(v);
 }
 
 void Grafo::imprimir(){

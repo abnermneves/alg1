@@ -3,11 +3,15 @@
 #include <string>
 #include <queue>
 #include <map>
+#include "jogo.h"
 #include "grafo.h"
 #include "funcoes.h"
 #include "jogador.h"
 
 int main(int argc, char* argv[]) {
+
+//--------------------------- FLUXO DE ARQUIVO ----------------------------//
+
     if (argc != 2)
         return 0;
 
@@ -17,6 +21,7 @@ int main(int argc, char* argv[]) {
 
     if (!file.is_open())
         return 0;
+
 
 //------------------------ DECLARAÇÃO E LEITURA DE TABULEIRO --------------//
 
@@ -37,7 +42,8 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    //------------------ DECLARAÇÃO E LEITURA DE JOGADORES -----------------//
+
+//---------------------- DECLARAÇÃO E LEITURA DE JOGADORES -----------------//
 
     std::priority_queue<Jogador*, std::vector<Jogador*>, comparator_jogadores> jogadores;
     char letra;
@@ -56,32 +62,31 @@ int main(int argc, char* argv[]) {
     file.close();
 
 
-    //imprime tabuleiro
-    for (unsigned int i = 0; i < n; i++){
-        for (unsigned int j = 0; j < m; j++){
-            std::cout << tabuleiro[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    //imprime jogadores
-    while (!jogadores.empty()){
-        auto it = jogadores.top();
-        jogadores.pop();
-        std::cout << it->get_nome() << " " << it->get_posicao() << std::endl;
-    }
+//----------------------------- PROCESSAMENTO DO JOGO -----------------------//
 
     Grafo g = Grafo(n, m, tabuleiro);
-    g.imprimir();
 
-    auto tree = g.BFS(1);
-    for (auto it = tree->begin(); it != tree->end(); it++){
-        for (auto it2 = (*it)->begin(); it2 != (*it)->end(); it2++){
-            std::cout << *it2 << " ";
-        }
-        std::cout << std::endl;
+    Jogador* vencedor = jogar(tabuleiro, &g, &jogadores);
+
+    if(vencedor){
+        std::cout << vencedor->get_nome() << std::endl
+                  << vencedor->get_ultima_rodada() << std::endl;
+    } else {
+        std::cout << "SEM VENCEDORES" << std::endl;
     }
-    std::cout << std::endl;
+
+
+//----------------------- LIBERAÇÃO DE MEMÓRIA UTILIZADA -------------------//
+
+    for (unsigned int i = 0; i < n; i++)
+        delete tabuleiro[i];
+    delete tabuleiro;
+
+    while (!jogadores.empty()){
+        vencedor = jogadores.top();
+        jogadores.pop();
+        delete vencedor;
+    }
 
     return 0;
 }

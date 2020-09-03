@@ -6,6 +6,8 @@ Jogador::Jogador(char nome, unsigned int posicao){
     this->nome = nome;
     this->posicao = posicao;
     this->casas_andadas_ultima_rodada = 0;
+    this->ultima_rodada = 0;
+    this->visitado.push_back(posicao);
 }
 
 Jogador::~Jogador(){
@@ -26,8 +28,32 @@ unsigned int Jogador::get_casas_andadas() const{
     return this->casas_andadas_ultima_rodada;
 }
 
+unsigned int Jogador::get_ultima_rodada() const{
+    return this->ultima_rodada;
+}
+
+bool Jogador::visitou(unsigned int posicao) const{
+    for (auto it = this->visitado.begin(); it != this->visitado.end(); it++){
+        if (*it == posicao)
+            return true;
+    }
+    return false;
+}
+
+void Jogador::add_visitado(unsigned int posicao){
+    this->visitado.push_back(posicao);
+}
+
+void Jogador::set_posicao(unsigned int posicao){
+    this->posicao = posicao;
+}
+
 void Jogador::set_casas_andadas(unsigned int casas){
     this->casas_andadas_ultima_rodada = casas;
+}
+
+void Jogador::set_ultima_rodada(unsigned int rodada){
+    this->ultima_rodada = rodada;
 }
 
 // ----------------------------- COMPARATOR -----------------------------//
