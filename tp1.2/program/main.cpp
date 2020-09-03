@@ -51,7 +51,6 @@ int main(int argc, char* argv[]) {
 
     //lê posições iniciais dos jogadores
     for (unsigned int a = 0; a < k; a++){
-        //por enquanto é só bullshit até eu implementar de vdd
         unsigned int i, j;
         file >> i >> j;
         letra = a + 65; //ASCII
