@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
         file >> d;
         diamantes.push_back(d);
     }
-    imprimir(&diamantes);
+    //imprimir(&diamantes);
     cout << guloso(&diamantes) << endl;
     return 0;
 }
