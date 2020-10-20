@@ -31,6 +31,8 @@ int main(int argc, char* argv[]) {
         diamantes.push_back(d);
     }
     //imprimir(&diamantes);
-    cout << guloso(&diamantes) << endl;
+    //cout << guloso(&diamantes) << endl;
+    unsigned int melhor = billybruto(&diamantes);
+    cout << "Melhor: " << melhor << endl;
     return 0;
 }
