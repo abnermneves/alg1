@@ -1,7 +1,7 @@
 #include "diamantes.h"
 
 unsigned int bruto(std::vector<unsigned int> d, unsigned int* melhor, std::vector<unsigned int>* melhorespares, std::vector<unsigned int> paresatual){
-    unsigned int resultado = d.at(0);
+    unsigned int resultado = *melhor;
     unsigned int n = d.size();
     std::vector<unsigned int> copia;
 
@@ -9,11 +9,11 @@ unsigned int bruto(std::vector<unsigned int> d, unsigned int* melhor, std::vecto
     //std::cout << "oi3" << std::endl;
         for (unsigned int b = a+1; b < d.size(); b++){
             //std::cout << "oi4" << std::endl;//std::vector<unsigned int> paresatual;
-            imprimir(&d);
+            //imprimir(&d);
             //std::cout << "oi1" << std::endl;
             //paresatual->push_back(i);
             //paresatual->push_back(j);
-            std::cout << a << " " << b << std::endl;
+            //std::cout << a << " " << b << std::endl;
             copia.assign(d.begin(), d.end());
             combinaPedras(&d, a, b);
             imprimir(&d);
@@ -37,8 +37,8 @@ unsigned int bruto(std::vector<unsigned int> d, unsigned int* melhor, std::vecto
             *melhor = resultado;
             melhorespares->assign(paresatual.begin(), paresatual.end());
         }
-        std::cout << "The road so far to " << resultado << " " << *melhor << ": ";
-        imprimir(&paresatual);
+        //std::cout << "The road so far to " << resultado << " " << *melhor << ": ";
+        //imprimir(&paresatual);
     }
     return resultado;
 }
@@ -52,7 +52,7 @@ unsigned int billybruto(std::vector<unsigned int>* diamantes){
     resultado = bruto(*diamantes, &melhor, &melhorespares, paresatual);
     // faz uma cópia para não alterar o vetor original
     //*d = *diamantes;
-    std::cout << "Resultado:" << resultado << std::endl;
+    //std::cout << "Resultado:" << resultado << std::endl;
     std::cout << "A ordem dos pares excluídos foi:" << std::endl;
     imprimir(&melhorespares);
     return melhor;

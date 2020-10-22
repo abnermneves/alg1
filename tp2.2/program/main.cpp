@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <cmath>
 #include "diamantes.h"
 
 using namespace std;
@@ -32,7 +33,13 @@ int main(int argc, char* argv[]) {
     }
     //imprimir(&diamantes);
     //cout << guloso(&diamantes) << endl;
-    unsigned int melhor = billybruto(&diamantes);
+    // unsigned int melhor = billybruto(&diamantes);
+    unsigned int melhor = powerpuffdynamo(&diamantes);
     cout << "Melhor: " << melhor << endl;
+
+    // double g;
+    // std::cin >> g;
+    // double f = pow(10.0, g);
+    // std::cout <<"10^g: " << f << std::endl;
     return 0;
 }
