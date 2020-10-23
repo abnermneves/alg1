@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
         cout << resultado << endl << "Tempo de execução: " << elapsed_time.count() << endl;
 
     } else {
-        // resultado = billybruto(&diamantes);
+        //resultado = billybruto(&diamantes);
         resultado = powerpuffdynamo(&diamantes);
         cout << resultado << endl;
     }
