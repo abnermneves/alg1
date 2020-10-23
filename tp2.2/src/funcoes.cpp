@@ -1,11 +1,5 @@
 #include "diamantes.h"
 
-void imprimir(std::vector<unsigned int>* v){
-    for (auto it = v->begin(); it != v->end(); it++)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-}
-
 void combinaPedras(std::vector<unsigned int>* v, unsigned int i, unsigned int j){
     //se têm o mesmo peso, apaga os dois
     if (v->at(i) == v->at(j)){
@@ -26,4 +20,10 @@ void combinaPedras(std::vector<unsigned int>* v, unsigned int i, unsigned int j)
         v->at(j) -= v->at(i);
         v->erase(v->begin()+i);
     }
+}
+
+void imprimir(std::vector<unsigned int>* v){
+    for (auto it = v->begin(); it != v->end(); it++)
+        std::cout << *it << " ";
+    std::cout << std::endl;
 }

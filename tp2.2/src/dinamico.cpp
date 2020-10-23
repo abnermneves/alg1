@@ -8,6 +8,7 @@ unsigned int dinamico(std::vector<unsigned int> d,
                     std::vector<unsigned int>* melhorespares,
                     std::vector<unsigned int> paresatual){
 
+    // se sobrou 0 pedras, atualiza o resultado geral
     if (d.size() == 0){
         if (0 < *melhor){
             *melhor = 0;
@@ -16,13 +17,19 @@ unsigned int dinamico(std::vector<unsigned int> d,
         return 0;
     }
 
+    // ordena o vetor antes de procurá-lo na memória
     std::sort(d.begin(), d.end());
+
+    // verifica se esse vetor de pesos já foi resolvido
+    // e, caso positivo, retorna o resultado
     for (unsigned int i = 0; i < memo->size(); i++){
         if (d == memo->at(i)){
             (*hits)++;
             return resultados->at(i);
         }
     }
+
+    // se ainda não foi resolvido, então continua o processo
     (*misses)++;
     unsigned int resultado = *melhor;
     std::vector<unsigned int> copia;
@@ -32,34 +39,34 @@ unsigned int dinamico(std::vector<unsigned int> d,
     memo->push_back(d);
     resultados->push_back(-1);
 
+    // testa todas as possibilidades de ordem de exclusão dos pares de pedras
     for (unsigned int a = 0; a < d.size(); a++){
-    //std::cout << "oi3" << std::endl;
         for (unsigned int b = a+1; b < d.size(); b++){
-            //std::cout << "oi4" << std::endl;//std::vector<unsigned int> paresatual;
-            //imprimir(&d);
-            //std::cout << "oi1" << std::endl;
-            //paresatual->push_back(i);
-            //paresatual->push_back(j);
-            //std::cout << a << " " << b << std::endl;
+            // mantém uma cópia do vetor antes de combinar o par
             copia.assign(d.begin(), d.end());
+
             combinaPedras(&d, a, b);
-            std::cout << "Vetor " << pos << " de tamanho " << d.size() << ": ";
-            imprimir(&d);
-            //std::cout << "oi2" << std::endl;
+
+            // mantém um histórico dos pares excluídos para um eventual backtracking
             paresatual.push_back(a);
             paresatual.push_back(b);
-            resultado = dinamico(d, hits, misses, memo, resultados, melhor, melhorespares, paresatual);
-            d.assign(copia.begin(), copia.end());
 
+            resultado = dinamico(d, hits, misses, memo, resultados, melhor, melhorespares, paresatual);
+
+            // armazena a solução na memória
             if (resultados->at(pos) == -1 || resultado < resultados->at(pos)){
                 resultados->at(pos) = resultado;
             }
 
+            // restaura o vetor ao que era antes de combinar as pedras
+            d.assign(copia.begin(), copia.end());
             paresatual.pop_back();
             paresatual.pop_back();
+
         }
     }
 
+    // se sobrou apenas uma pedra, atualiza o resultado
     if (d.size() == 1){
         resultado = d.at(0);
         resultados->at(pos) = resultado;
@@ -80,25 +87,18 @@ unsigned int powerpuffdynamo(std::vector<unsigned int>* diamantes){
     std::vector<unsigned int> melhorespares;
     std::vector<unsigned int> paresatual;
     std::vector<std::vector<unsigned int>> memo;
-    std::vector<int> resultados, as, bes;
-    unsigned int melhor, atual, resultado, hits, misses;
+    std::vector<int> resultados;
+    unsigned int melhor, hits, misses;
+
+    // quantidade de vezes que o algoritmo evitou e não evitou
+    // de processar novamente um mesmo vetor
     hits = 0;
     misses = 0;
-    resultado = dinamico(*diamantes, &hits, &misses, &memo, &resultados, &melhor, &melhorespares, paresatual);
-    // faz uma cópia para não alterar o vetor original
-    //*d = *diamantes;
-    //std::cout << "Resultado:" << resultado << std::endl;
-    //std::cout << "A ordem dos pares excluídos foi:" << std::endl;
-    //imprimir(&melhorespares);
 
-    for (unsigned int i = 0; i < memo.size(); i++){
-        std::cout << "----------------------------------------------------" << std::endl;
-        std::cout << "Vetor " << i << ": " << resultados.at(i) << std::endl;
-        imprimir(&memo.at(i));
-        std::cout << "----------------------------------------------------" << std::endl;
-    }
-    std::cout << "Hits: " << hits << std::endl << "Misses: " << misses << std::endl;
+    dinamico(*diamantes, &hits, &misses, &memo, &resultados, &melhor, &melhorespares, paresatual);
+
     melhor = resultados.at(0);
+
     return melhor;
 
 }

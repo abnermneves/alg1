@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <vector>
+#include <chrono>
 #include <cmath>
 #include "diamantes.h"
 
@@ -10,7 +12,7 @@ int main(int argc, char* argv[]) {
 
 //--------------------------- FLUXO DE ARQUIVO ----------------------------//
 
-    if (argc != 2)
+    if (argc < 2)
         return 0;
 
     std::string fname;
@@ -22,7 +24,7 @@ int main(int argc, char* argv[]) {
 
 //-------------------------- DECLARAÇÃO E LEITURA ----------------------//
 
-    unsigned int n, d;
+    unsigned int n, d, resultado;
     file >> n;
 
     vector<unsigned int> diamantes;
@@ -31,15 +33,29 @@ int main(int argc, char* argv[]) {
         file >> d;
         diamantes.push_back(d);
     }
-    //imprimir(&diamantes);
-    //cout << guloso(&diamantes) << endl;
-    // unsigned int melhor = billybruto(&diamantes);
-    unsigned int melhor = powerpuffdynamo(&diamantes);
-    cout << "Melhor: " << melhor << endl;
 
-    // double g;
-    // std::cin >> g;
-    // double f = pow(10.0, g);
-    // std::cout <<"10^g: " << f << std::endl;
+//------------------------------- EXECUÇÃO ------------------------------//
+
+    string tempo = "tempo";
+    if ((argc > 2) && (tempo.compare(argv[2]) == 0)){
+        chrono::high_resolution_clock::time_point start, end;
+
+        //marca o horário antes e depois da execução
+        start = chrono::high_resolution_clock::now();
+        resultado = powerpuffdynamo(&diamantes);
+        end = chrono::high_resolution_clock::now();
+
+        //calcula a diferença do tempo de fim e início
+        chrono::duration<double, micro> elapsed_time
+        = chrono::duration_cast<chrono::duration<double>>(end - start);
+        cout << resultado << endl << "Tempo de execução: " << elapsed_time.count() << endl;
+
+    } else {
+        // resultado = billybruto(&diamantes);
+        resultado = powerpuffdynamo(&diamantes);
+        cout << resultado << endl;
+    }
+
+
     return 0;
 }
